@@ -298,6 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if(cards.length){card_extender(); window.addEventListener("resize", card_extender);}
 
+        /*
         //Dark Mode
         function darkMode(){
             var toggleDark = document.querySelectorAll('[data-toggle-theme]');
@@ -312,6 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     addTransitions();
                 },650);
             }
+
             function activateLightMode(){
                 document.getElementById('theme-check').setAttribute('content','#FFFFFF')
                 document.body.classList.add('theme-light');
@@ -358,6 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
             function addTransitions(){document.body.classList.remove('no-ani');}
         }
         darkMode();
+        */
 
 
         //File Upload
@@ -404,7 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(data => {
                     setTimeout(function(){
                         if(dataMenuLoad[dataMenuLoad.length-1] === e){
-                            darkMode();
+                            // darkMode();
                             submenus();
                             pageHighlights();
                             activatePage();

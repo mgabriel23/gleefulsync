@@ -72,7 +72,7 @@ Item Support: https://www.enableds.com/contact/
 }
 
 .theme-light {
-  background-color: #FFFFFF;
+  background-color: #F3F3F3;
 }
 
 .theme-light .bg-theme {
@@ -1232,6 +1232,7 @@ body {
   font-family: "Roboto", sans-serif !important;
   line-height: 24px !important;
   color: #747474 !important;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 h1, h2, h3, h4, h5, h6, h7 {
