@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
     <title>GleefulSyncApp - Locale Attendance Monitoring</title>
     <link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
@@ -58,6 +58,12 @@
         <a href="#reports"><i class="bi bi-file-earmark-arrow-down-fill"></i><span>Reports</span></a>
         <a href="#settings" class="link-disabled" data-bs-toggle="offcanvas" data-bs-target="#menu-sidebar"><i class="bi bi-gear-fill"></i><span>Settings</span></a>
     </div>
+
+    <!-- Header Bar-->
+	<div class="header-bar header-fixed header-app header-auto-show" id="header-bar">
+		<a href="#metrics"><i class="bi bi-chevron-up font-13"></i></a>
+		<span class="header-title">Back to top</span>
+	</div>
 
     <!-- Page Content - Only Page Elements Here-->
     <div class="page-content footer-clear">

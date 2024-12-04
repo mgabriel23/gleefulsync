@@ -15,12 +15,12 @@ document.addEventListener('DOMContentLoaded', () => {
     var pwaNoCache = false; //Requires server and HTTPS/SSL. Will clear cache with each visit
 
     //Setting Service Worker Locations scope = folder | location = service worker js location
-    //const pwaLocation = '/gleefulsync_v1.0/_service-worker.js'; // Correct path
-    //const pwaScope = '/gleefulsync_v1.0/'; // Scope matches the project folder
+    const pwaLocation = '/gleefulsync_v1.0/_service-worker.js'; // Correct path
+    const pwaScope = '/gleefulsync_v1.0/'; // Scope matches the project folder
 
     // for production server
-    var pwaScope = "/";
-    var pwaLocation = "/_service-worker.js";
+    // var pwaScope = "/";
+    // var pwaLocation = "/_service-worker.js";
 
     //Place all your custom Javascript functions and plugin calls below this line
     function init_template(){
@@ -698,7 +698,30 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             });
-        });        
+        });
+        
+        document.querySelectorAll('#header-bar a').forEach(anchor2 => {
+            anchor2.addEventListener('click', function (e) {
+                e.preventDefault();
+        
+                // Get target section
+                const targetId = this.getAttribute('href').substring(1); // Remove '#' from href
+                const targetElement = document.getElementById(targetId);
+        
+                if (targetElement) {
+                    // Calculate offset
+                    const offset = 80; // Adjust this value for desired space above the section
+                    const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+                    const offsetPosition = elementPosition - offset;
+        
+                    // Smooth scroll to the calculated position
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth',
+                    });
+                }
+            });
+        });
 
         //PWA Settings
         if(isPWA === true){

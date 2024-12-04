@@ -1227,7 +1227,8 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 /*Typography 1 Settings*/
-body {
+html, body {
+  background-color: #F3F3F3;
   font-size: 13px;
   font-family: "Roboto", sans-serif !important;
   line-height: 24px !important;

@@ -1,16 +1,16 @@
 <?php
     // db.php
-    //$host = 'localhost'; // Your database host
-    //$db = 'locale_attendance_db'; // Your database name
-    //$user = 'root'; // Your database username
-    //$pass = ''; // Your database password
-    //$charset = 'utf8mb4';
-
-    $host = 'localhost';
-    $db = 'cpjvcifn_locale_attendance_db'; // Your database name
-    $user = 'cpjvcifn_mrkbrygbrl'; // Your database username
-    $pass = 'Codeislife<3'; // Your database password
+    $host = 'localhost'; // Your database host
+    $db = 'locale_attendance_db'; // Your database name
+    $user = 'root'; // Your database username
+    $pass = ''; // Your database password
     $charset = 'utf8mb4';
+
+    // $host = 'localhost';
+    // $db = 'cpjvcifn_locale_attendance_db'; // Your database name
+    // $user = 'cpjvcifn_mrkbrygbrl'; // Your database username
+    // $pass = 'Codeislife<3'; // Your database password
+    // $charset = 'utf8mb4';
 
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
     $options = [
