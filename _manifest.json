@@ -1,5 +1,5 @@
 {
-"version": "1.0",
+"version": "1.1",
 "lang" : "en",
 "name" : "GleefulSyncApp",
 "scope" : "/",
@@ -8,8 +8,8 @@
 "short_name" : "GleefulSyncApp",
 "description" : "",
 "orientation" : "portrait",
-"background_color": "#000000",
-"theme_color": "#000000",
+"background_color": "#FFFFFF",
+"theme_color": "#FFFFFF",
 "generated" : "true",
   "icons": [
     {

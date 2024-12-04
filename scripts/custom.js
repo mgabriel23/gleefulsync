@@ -10,13 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
     //Global Variables
     let isPWA = true;  // Enables or disables the service worker and PWA
     let isAJAX = true; // AJAX transitions. Requires local server or server
-    var pwaName = "PayApp"; //Local Storage Names for PWA
+    var pwaName = "GleefulSyncApp"; //Local Storage Names for PWA
     var pwaRemind = 1; //Days to re-remind to add to home
     var pwaNoCache = false; //Requires server and HTTPS/SSL. Will clear cache with each visit
 
     //Setting Service Worker Locations scope = folder | location = service worker js location
-    var pwaScope = "/";
-    var pwaLocation = "/_service-worker.js";
+    const pwaLocation = '/gleefulsync_v1.0/_service-worker.js'; // Correct path
+    const pwaScope = '/gleefulsync_v1.0/'; // Scope matches the project folder
 
     //Place all your custom Javascript functions and plugin calls below this line
     function init_template(){
@@ -172,19 +172,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         //Activate Selected Menu
-        function activatePage(){
-            var activeMenu = document.querySelectorAll('[data-menu-active]');
-            if(activeMenu){
-                var activeData = activeMenu[0].getAttribute('data-menu-active');
-                var activeID = document.querySelectorAll('#'+activeData)[0]
-                activeID.classList.add('list-group-item-active')
-                if(activeID.parentNode.classList.contains('list-submenu')){
-                    var triggerSub = activeID.parentNode.getAttribute('id')
-                    document.querySelectorAll('[data-submenu="'+triggerSub+'"]')[0].classList.add('submenu-active');
-                    submenus();
+        function activatePage() {
+            var activeMenu = document.querySelector('[data-menu-active]');
+            if (activeMenu) {
+                var activeData = activeMenu.getAttribute('data-menu-active');
+                var activeID = document.querySelector('#' + activeData);
+        
+                if (activeID) {
+                    activeID.classList.add('list-group-item-active');
+        
+                    if (activeID.parentNode.classList.contains('list-submenu')) {
+                        var triggerSub = activeID.parentNode.getAttribute('id');
+                        var submenuTrigger = document.querySelector('[data-submenu="' + triggerSub + '"]');
+                        if (submenuTrigger) {
+                            submenuTrigger.classList.add('submenu-active');
+                            if (typeof submenus === 'function') {
+                                submenus();
+                            }
+                        }
+                    }
                 }
             }
-        }
+        }        
 
 		//Search Page
 		var searchField = document.querySelectorAll('[data-search]');
@@ -293,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function darkMode(){
             var toggleDark = document.querySelectorAll('[data-toggle-theme]');
             function activateDarkMode(){
-                document.getElementById('theme-check').setAttribute('content','#1f1f1f')
+                document.getElementById('theme-check').setAttribute('content','#FFFFFF')
                 document.body.classList.add('theme-dark');
                 document.body.classList.remove('theme-light', 'detect-theme');
                 for(let i = 0; i < toggleDark.length; i++){toggleDark[i].checked="checked"};

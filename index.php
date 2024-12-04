@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
     <title>GleefulSyncApp - Locale Attendance Monitoring</title>
@@ -91,7 +92,7 @@
         <!-- Quick Actions -->
         <div class="content" style="margin-top: 0; margin-bottom: 32px;">
             <div class="d-flex text-center">
-                <div class="me-auto">
+                <div class="m-auto">
                     <a href="#" data-bs-toggle="offcanvas" data-bs-target="#locale-attendees" class="icon icon-xxl rounded-m bg-theme shadow-m">
                         <!-- <i class="font-28 color-green-dark bi bi-arrow-up-circle"></i> -->
                         <i class="font-28 color-yellow-dark bi bi-house-fill"></i>
@@ -316,9 +317,8 @@
         <img src="app/icons/icon-128x128.png" alt="img" width="80" class="rounded-m mx-auto my-4">
             <h1 class="text-center">Install GleefulSync</h1>
             <p class="boxed-text-xl">
-                Install the App on your home screen, and access it just like a regular app.
+                Install PayApp on your home screen, and access it just like a regular app. Open your Safari menu and tap "Add to Home Screen".
             </p>
-            <a href="#" class="pwa-install btn btn-m rounded-s text-uppercase font-900 gradient-highlight shadow-bg shadow-bg-s btn-full">Add to Home Screen</a><br>
             <a href="#" class="pwa-dismiss close-menu color-theme text-uppercase font-900 opacity-50 font-11 text-center d-block mt-n2" data-bs-dismiss="offcanvas">Maybe Later</a>
         </div>
     </div>
