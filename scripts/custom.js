@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
     //const pwaScope = '/gleefulsync_v1.0/'; // Scope matches the project folder
 
     // for production server
-    const pwaLocation = '/_service-worker.js'; // Correct path
-    const pwaScope = '/'; // Scope matches the project folder
+    var pwaScope = "/";
+    var pwaLocation = "/_service-worker.js";
 
     //Place all your custom Javascript functions and plugin calls below this line
     function init_template(){
