@@ -502,7 +502,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //Header Date
         var headerLarge = document.querySelectorAll('.header-date')[0];
-        if(headerLarge){
+        var headerLarge2 = document.querySelectorAll('.header-date2')[0];
+        if(headerLarge || headerLarge2){
             var weekID = new Date();
             var weekdayName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
             var monthID = new Date();
@@ -518,6 +519,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if(dayName === 22){daySuffix = 'rd'};
             if(dayName === 31){daySuffix = 'st'};
             headerLarge.innerHTML += weekdayName[weekID.getDay()]  + ' ' +  dayName + daySuffix + ' ' + monthNames[monthID.getMonth()]
+            headerLarge2.innerHTML += weekdayName[weekID.getDay()]  + ' ' +  dayName + daySuffix + ' ' + monthNames[monthID.getMonth()]
         }
 
         //Form Validation
@@ -676,52 +678,28 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 		ath();
 
-        // aded for scrolling into link content
-        document.querySelectorAll('#footer-bar a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
+        function setupSmoothScroll(selector) {
+            document.querySelectorAll(selector).forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
         
-                // Get target section
-                const targetId = this.getAttribute('href').substring(1); // Remove '#' from href
-                const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        const offset = 80;
+                        const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+                        const offsetPosition = elementPosition - offset;
         
-                if (targetElement) {
-                    // Calculate offset
-                    const offset = 80; // Adjust this value for desired space above the section
-                    const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
-                    const offsetPosition = elementPosition - offset;
-        
-                    // Smooth scroll to the calculated position
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth',
-                    });
-                }
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth',
+                        });
+                    }
+                });
             });
-        });
+        }
         
-        document.querySelectorAll('#header-bar a').forEach(anchor2 => {
-            anchor2.addEventListener('click', function (e) {
-                e.preventDefault();
-        
-                // Get target section
-                const targetId = this.getAttribute('href').substring(1); // Remove '#' from href
-                const targetElement = document.getElementById(targetId);
-        
-                if (targetElement) {
-                    // Calculate offset
-                    const offset = 80; // Adjust this value for desired space above the section
-                    const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
-                    const offsetPosition = elementPosition - offset;
-        
-                    // Smooth scroll to the calculated position
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth',
-                    });
-                }
-            });
-        });
+        setupSmoothScroll('#footer-bar a');
 
         //PWA Settings
         if(isPWA === true){

@@ -35,6 +35,17 @@
             cursor: not-allowed;
             background-color: gray !important;
         }
+
+        .header-bar {
+            padding: 8px 13px;
+            /* padding-bottom: 0; */
+        }
+
+        .header-bar p, .header-bar a {
+            margin: 0 !important;
+            padding: 0 !important;
+            line-height: 16px;
+        }
     </style>
 </head>
 
@@ -61,8 +72,10 @@
 
     <!-- Header Bar-->
 	<div class="header-bar header-fixed header-app header-auto-show" id="header-bar">
-		<a href="#metrics"><i class="bi bi-chevron-up font-13"></i></a>
-		<span class="header-title">Back to top</span>
+        <div class="align-self-center me-auto pt-3">
+            <p class="color-highlight header-date"></p>
+            <h1>Welcome</h1>
+        </div>
 	</div>
 
     <!-- Page Content - Only Page Elements Here-->
@@ -72,7 +85,7 @@
         <div id="metrics" class="pt-3">
             <div class="page-title d-flex">
                 <div class="align-self-center me-auto">
-                    <p class="color-highlight header-date"></p>
+                    <p class="color-highlight header-date2"></p>
                     <h1>Welcome</h1>
                 </div>
                 <div class="align-self-center ms-auto">
