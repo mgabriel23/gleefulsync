@@ -50,12 +50,11 @@ self.addEventListener('install', function(event) {
 self.addEventListener('fetch', function(event) {
 	event.respondWith(
 		//Fetch Data from cache if offline
-		caches.match(event.request)
-			.then(function(response) {
-				if (response) {return response;}
-				return fetch(event.request);
-			}
-		)
+		fetch(event.request)
+            .catch(error => {
+                console.error('Fetch error:', error);
+                return new Response('Service Worker fetch failed.');
+            })
 	);
 	if(APP_DIAG){console.log('Service Worker: Fetching '+APP_NAME+'-'+APP_VER+' files from Cache');}
 });

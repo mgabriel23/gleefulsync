@@ -1,10 +1,10 @@
 {
     "version": "1.0",
     "lang": "en",
-    "name": "GleefulSyncAttendanceApp",
+    "name": "GleefulSyncPWA",
     "scope": "/",
     "display": "fullscreen",
-    "start_url": "/index.php",
+    "start_url": "/",
     "short_name": "GleefulSync",
     "description": "",
     "orientation": "portrait",
