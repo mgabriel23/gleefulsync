@@ -10,13 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
     //Global Variables
     let isPWA = true;  // Enables or disables the service worker and PWA
     let isAJAX = true; // AJAX transitions. Requires local server or server
-    var pwaName = "GleefulSyncApp"; //Local Storage Names for PWA
+    var pwaName = "GleefulSyncPWA"; //Local Storage Names for PWA
     var pwaRemind = 1; //Days to re-remind to add to home
     var pwaNoCache = false; //Requires server and HTTPS/SSL. Will clear cache with each visit
 
     //Setting Service Worker Locations scope = folder | location = service worker js location
-    const pwaLocation = '/gleefulsync_v1.0/_service-worker.js'; // Correct path
-    const pwaScope = '/gleefulsync_v1.0/'; // Scope matches the project folder
+    //const pwaLocation = '/gleefulsync/_service-worker.js'; // Correct path
+    //const pwaScope = '/gleefulsync/'; // Scope matches the project folder
 
     // for production server
     // const pwaScope = "/";

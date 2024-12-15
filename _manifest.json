@@ -1,11 +1,11 @@
 {
-    "version": "1.0",
+    "version": "1.1",
     "lang": "en",
     "name": "GleefulSyncPWA",
     "scope": "/",
     "display": "fullscreen",
     "start_url": "/",
-    "short_name": "GleefulSync",
+    "short_name": "GleefulSyncPWA",
     "description": "",
     "orientation": "portrait",
     "background_color": "#FFFFFF",
