@@ -42,7 +42,7 @@
             <div id="metrics" class="pt-3">
                 <div class="page-title d-flex">
                     <div class="align-self-center me-auto">
-                        <p class="color-highlight header-date2"></p>
+                        <p class="color-highlight header-date"></p>
                         <h1>Welcome</h1>
                     </div>
                     <div class="align-self-center ms-auto">

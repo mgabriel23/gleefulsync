@@ -11,16 +11,53 @@
         </div>
     </div>
     <div class="content mt-0">
-        <div class="table-responsive">
-            <table class="table color-theme mb-2">
-                <thead>
-                    <tr>
-                    <th class="border-fade-blue" scope="col" style="width: 30%;">Group #</th>
-                    <th class="border-fade-blue" scope="col">Name</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
+        <?php
+            include 'connection.php';
+
+            $query = '
+                SELECT groups_tbl.group_no AS group_no, 
+                    members_tbl.name AS member_name 
+                FROM attendance_tbl 
+                    INNER JOIN locales_tbl ON attendance_tbl.locale_id = locales_tbl.id 
+                    INNER JOIN members_tbl ON attendance_tbl.member_id = members_tbl.id 
+                    INNER JOIN group_members_tbl ON members_tbl.id = group_members_tbl.member_id 
+                    INNER JOIN groups_tbl ON group_members_tbl.group_id = groups_tbl.id 
+                    INNER JOIN batches_tbl ON attendance_tbl.batch_id = batches_tbl.id 
+                    INNER JOIN platforms_tbl ON attendance_tbl.platform_id = platforms_tbl.id 
+                WHERE platforms_tbl.short_name = "Youtube" 
+                    AND CURRENT_TIME() BETWEEN batches_tbl.start_time AND batches_tbl.end_time 
+                    AND batches_tbl.day = (WEEKDAY(CURRENT_DATE())) 
+                    AND DATE(attendance_tbl.date_created) = CURRENT_DATE() 
+                    ORDER BY members_tbl.id
+            ';
+
+            $stmt = $pdo->prepare($query);
+            $stmt->execute();
+            $youtube_attendees = $stmt->fetchAll();
+        ?>
+            <div class="table-responsive">
+                <table class="table color-theme mb-2">
+                    <thead>
+                        <tr>
+                        <th class="border-fade-blue" scope="col" style="width: 30%;">Group #</th>
+                        <th class="border-fade-blue" scope="col">Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if ($youtube_attendees): ?>
+                            <?php foreach ($youtube_attendees as $youtube_attendee): ?>
+                                <tr class="border-fade-blue">
+                                    <td><?php echo htmlspecialchars($youtube_attendee['group_no']); ?></td>
+                                    <td><?php echo htmlspecialchars($youtube_attendee['member_name']); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="2" class="text-center">No attendees found.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
     </div>
 </div>

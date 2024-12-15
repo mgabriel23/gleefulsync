@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     var pwaNoCache = false; //Requires server and HTTPS/SSL. Will clear cache with each visit
 
     //Setting Service Worker Locations scope = folder | location = service worker js location
-    //const pwaLocation = '/gleefulsync/_service-worker.js'; // Correct path
-    //const pwaScope = '/gleefulsync/'; // Scope matches the project folder
+    const pwaLocation = '/gleefulsync/_service-worker.js'; // Correct path
+    const pwaScope = '/gleefulsync/'; // Scope matches the project folder
 
     // for production server
     // const pwaScope = "/";
@@ -502,7 +502,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //Header Date
         var headerLarge = document.querySelectorAll('.header-date')[0];
-        var headerLarge2 = document.querySelectorAll('.header-date2')[0];
         if(headerLarge || headerLarge2){
             var weekID = new Date();
             var weekdayName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -519,7 +518,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if(dayName === 22){daySuffix = 'rd'};
             if(dayName === 31){daySuffix = 'st'};
             headerLarge.innerHTML += weekdayName[weekID.getDay()]  + ' ' +  dayName + daySuffix + ' ' + monthNames[monthID.getMonth()]
-            headerLarge2.innerHTML += weekdayName[weekID.getDay()]  + ' ' +  dayName + daySuffix + ' ' + monthNames[monthID.getMonth()]
         }
 
         //Form Validation
