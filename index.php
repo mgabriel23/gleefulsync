@@ -160,27 +160,33 @@
             <!-- reports content -->
             <div id="reports" class="card card-style">
                 <div class="content">
-                    <div class="tabs tabs-pill" id="tab-group-2">
+                    <div class="tabs tabs-pill" id="tab-group-1">
                         <div class="tab-controls rounded-m p-1 overflow-visible">
-                            <a class="font-13 rounded-m shadow-bg shadow-bg-s" data-bs-toggle="collapse" href="#tab-4" aria-expanded="true" id="day-tab-btn">Day</a>
-                            <a class="font-13 rounded-m shadow-bg shadow-bg-s" data-bs-toggle="collapse" href="#tab-5" aria-expanded="false" id="weekly-tab-btn">Weekly</a>
-                            <a class="font-13 rounded-m shadow-bg shadow-bg-s" data-bs-toggle="collapse" href="#tab-6" aria-expanded="false" id="monthly-tab-btn">Montly</a>
+                            <a class="font-13 rounded-m shadow-bg shadow-bg-s" data-bs-toggle="collapse" href="#tab-1" aria-expanded="true" id="day-tab-btn">Day</a>
+                            <a class="font-13 rounded-m shadow-bg shadow-bg-s" data-bs-toggle="collapse" href="#tab-2" aria-expanded="false" id="weekly-tab-btn">Weekly</a>
+                            <a class="font-13 rounded-m shadow-bg shadow-bg-s" data-bs-toggle="collapse" href="#tab-3" aria-expanded="false" id="monthly-tab-btn">Montly</a>
                         </div>
                         <div class="mt-3"></div>
                         <!-- daily report content -->
-                        <div class="collapse show" id="tab-4" data-bs-parent="#tab-group-2">
+                        <div class="collapse show" id="tab-1" data-bs-parent="#tab-group-1">
                             <div class="divider my-2 opacity-50"></div>
-                            <div id="daily-report-contents"></div>
+                            <div id="daily-reports-list">
+                                <span class="text-white">1</span>
+                            </div>
                         </div>
                         <!-- Tab Group 2 -->
-                        <div class="collapse" id="tab-5" data-bs-parent="#tab-group-2">
+                        <div class="collapse" id="tab-2" data-bs-parent="#tab-group-1">
                             <div class="divider my-2 opacity-50"></div>
-                            <div id="weekly-report-contents"></div>
+                            <div id="weekly-reports-list">
+                                <span class="text-white">2</span>
+                            </div>
                         </div>
                         <!-- Tab Group 3 -->
-                        <div class="collapse" id="tab-6" data-bs-parent="#tab-group-2">
+                        <div class="collapse" id="tab-3" data-bs-parent="#tab-group-1">
                             <div class="divider my-2 opacity-50"></div>
-                            <div id="monthly-report-contents"></div>
+                            <div id="monthly-reports-list">
+                                <span class="text-white">3</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -237,5 +243,159 @@
     <script src="scripts/bootstrap.min.js"></script>
     <script src="scripts/custom.js"></script>
 
-    <!-- <script></script> -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log("DOM fully loaded and parsed.");
+
+            async function loadDailyReportsList() {
+                try {
+                    const response = await fetch('daily-reports-list.php');
+                    if (!response.ok) {
+                        throw new Error(`Network error: ${response.statusText}`);
+                    }
+
+                    const data = await response.json();
+                    console.log("Loading daily reports list in tab");
+
+                    const contentsDiv = document.getElementById('daily-reports-list');
+                    contentsDiv.innerHTML = '';
+
+                    if (data.length === 0) {
+                        contentsDiv.innerHTML = '<p>No records found for today.</p>';
+                        return;
+                    }
+
+                    data.forEach(report => {
+                        const reportElement = document.createElement('a');
+                        reportElement.href = "#";
+                        reportElement.className = "d-flex py-1";
+                        reportElement.setAttribute("data-bs-toggle", "offcanvas");
+
+                        reportElement.innerHTML = `
+                            <div class="align-self-center ps-1">
+                                <h5 class="pt-1 mb-n1">${report.gathering_type}</h5>
+                                <p class="mb-0 font-11 opacity-70">${report.gathering_time}</p>
+                            </div>
+                            <div class="align-self-center ms-auto text-end">
+                                <span class="btn btn-xxs gradient-green shadow-bg shadow-bg-xs" onclick="generateDailyReportPDF('${report.batch_id}', '${report.gathering_type}', '${report.gathering_time}', '${report.report_date}')">
+                                    Save
+                                </span>
+                            </div>
+                        `;
+                        contentsDiv.appendChild(reportElement);
+                    });
+
+                    console.log("Successfully loaded the daily reports list.");
+                    console.log(data);
+                } catch (error) {
+                    console.error("Error fetching daily reports list:", error);
+                }
+            }
+
+            // load daily reports list in tab
+            loadDailyReportsList();
+
+            async function loadWeeklyReportsList() {
+                try {
+                    const response = await fetch('weekly-reports-list.php');
+                    if (!response.ok) {
+                        throw new Error(`Network error: ${response.statusText}`);
+                    }
+
+                    const data = await response.json();
+                    console.log("Loading weekly reports list in tab");
+
+                    const contentsDiv = document.getElementById('weekly-reports-list');
+                    contentsDiv.innerHTML = '';
+
+                    if (data.length === 0) {
+                        contentsDiv.innerHTML = '<p>No records found for this week.</p>';
+                        return;
+                    }
+
+                    data.forEach(report => {
+                        const reportElement = document.createElement('a');
+                        reportElement.href = "#";
+                        reportElement.className = "d-flex py-1";
+                        reportElement.setAttribute("data-bs-toggle", "offcanvas");
+
+                        reportElement.innerHTML = `
+                            <div class="align-self-center ps-1">
+                                <h5 class="pt-1 mb-n1">${report.week_range}</h5>
+                                <p class="mb-0 font-11 opacity-70">PM / WS / TG</p>
+                            </div>
+                            <div class="align-self-center ms-auto text-end">
+                                <span class="btn btn-xxs gradient-green shadow-bg shadow-bg-xs" onclick="generateWeeklyReportPDF('${report.year}', '${report.week_no}', '${report.week_range}')">
+                                    Save
+                                </span>
+                            </div>
+                        `;
+                        contentsDiv.appendChild(reportElement);
+                    });
+
+                    console.log("Successfully loaded the weekly reports list.");
+                    console.log(data);
+                } catch (error) {
+                    console.error("Error fetching weekly reports list:", error);
+                }
+            }
+
+            // load weekly reports list in the tab
+            document.getElementById('weekly-tab-btn').addEventListener('click', function (event) {
+                event.preventDefault();
+                loadWeeklyReportsList();
+            });
+
+            async function loadMonthlyReportsList() {
+                try {
+                    const response = await fetch('monthly-reports-list.php');
+                    if (!response.ok) {
+                        throw new Error(`Network error: ${response.statusText}`);
+                    }
+
+                    const data = await response.json();
+                    console.log("Loading monthly reports list in tab");
+
+                    const contentsDiv = document.getElementById('monthly-reports-list');
+                    contentsDiv.innerHTML = '';
+
+                    if (data.length === 0) {
+                        contentsDiv.innerHTML = '<p>No records found for this month.</p>';
+                        return;
+                    }
+
+                    data.forEach(report => {
+                        const reportElement = document.createElement('a');
+                        reportElement.href = "#";
+                        reportElement.className = "d-flex py-1";
+                        reportElement.setAttribute("data-bs-toggle", "offcanvas");
+
+                        reportElement.innerHTML = `
+                            <div class="align-self-center ps-1">
+                                <h5 class="pt-1 mb-n1">${report.month_name}</h5>
+                                <p class="mb-0 font-11 opacity-70">PM / WS / TG</p>
+                            </div>
+                            <div class="align-self-center ms-auto text-end">
+                                <span class="btn btn-xxs gradient-green shadow-bg shadow-bg-xs" onclick="generateMonthlyReportPDF('${report.year}', '${report.month_name}', '${report.month_no}')">
+                                    Save
+                                </span>
+                            </div>
+                        `;
+                        contentsDiv.appendChild(reportElement);
+                    });
+
+                    console.log("Successfully loaded the monthly reports list.");
+                    console.log(data);
+                } catch (error) {
+                    console.error("Error fetching monthly reports list:", error);
+                }
+            }
+
+            // load monthly reports list in the tab
+            document.getElementById('monthly-tab-btn').addEventListener('click', function (event) {
+                event.preventDefault();
+                loadMonthlyReportsList();
+            });
+        });
+    </script>
 </body>

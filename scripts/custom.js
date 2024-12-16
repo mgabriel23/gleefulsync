@@ -409,6 +409,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(data => data.text())
                 .then(html => e.innerHTML = html)
                 .then(data => {
+                    console.log("Loading attendees list");
                     setTimeout(function(){
                         if(dataMenuLoad[dataMenuLoad.length-1] === e){
                             // darkMode();
